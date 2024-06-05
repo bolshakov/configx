@@ -1,0 +1,18 @@
+module ConfigX
+  VERSION: String
+
+  def self.builder: -> Builder
+  def self.from: (Builder::source, **untyped) -> Config
+
+  def self.load: (
+      String env,
+      env_prefix: String,
+      env_separator: String,
+      dir_name: String,
+      file_name: String,
+      config_root: String
+    ) -> Config
+
+
+  def self.loader: -> Zeitwerk::Loader
+end

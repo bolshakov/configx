@@ -1,0 +1,8 @@
+
+module ConfigX
+  class HashSource < Source
+    def initialize: (Source::config_hash) -> void
+
+    attr_reader source: Source::config_hash
+  end
+end

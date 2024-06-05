@@ -1,0 +1,8 @@
+
+module ConfigX
+  class Source
+    type config_hash = Hash[untyped, untyped]
+
+    def load: -> config_hash
+  end
+end

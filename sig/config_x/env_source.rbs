@@ -1,0 +1,11 @@
+module ConfigX
+  class EnvSource < HashSource
+    type env = Hash[String, String]
+
+    def initialize: (env, prefix: String, separator: String) -> void
+
+    attr_reader env: env
+    attr_reader prefix: String
+    attr_reader separator: String
+  end
+end

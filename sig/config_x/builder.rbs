@@ -1,0 +1,21 @@
+module ConfigX
+  class Builder
+    type source = Source | Hash[untyped, untyped] | String | Pathname | Object
+
+    def self.load: -> Config
+    def self.source: [T < Source] (source, **untyped) -> T
+
+    def initialize: -> void
+
+    attr_reader sources: Array[Source]
+
+
+    def add_source: (source, **untyped) -> self
+
+    def load: -> Config
+
+    private
+
+    def read_from_sources: -> Hash[untyped, untyped]
+  end
+end

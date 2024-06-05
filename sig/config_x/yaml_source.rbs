@@ -1,0 +1,10 @@
+
+module ConfigX
+  class YamlSource < Source
+    def initialize: (String) -> void
+
+    private
+
+    attr_reader source: String
+  end
+end

@@ -1,0 +1,7 @@
+module ConfigX
+  class FileSource < Source
+    def initialize: (String | Pathname) -> void
+
+    attr_reader path: String | Pathname
+  end
+end
