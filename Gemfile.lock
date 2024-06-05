@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    configx (0.1.0)
+    configx (0.2.0)
       deep_merge
       zeitwerk
 
