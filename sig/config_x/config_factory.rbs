@@ -13,21 +13,21 @@ module ConfigX
     def self.default_file_name: -> String
 
     def self.load: (
-        String env,
-        env_prefix: String,
-        env_separator: String,
-        dir_name: String,
-        file_name: String,
-        config_root: String
+        ?String env,
+        ?env_prefix: String,
+        ?env_separator: String,
+        ?dir_name: String,
+        ?file_name: String,
+        ?config_root: String
       ) -> Config
 
     def initialize: (
-        String env,
-        env_prefix: String,
-        env_separator: String,
-        dir_name: String,
-        file_name: String,
-        config_root: String
+        ?String env,
+        ?env_prefix: String,
+        ?env_separator: String,
+        ?dir_name: String,
+        ?file_name: String,
+        ?config_root: String
       ) -> void
 
     def load: -> Config
