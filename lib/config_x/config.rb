@@ -21,7 +21,7 @@ module ConfigX
           end
         end
 
-        self[key] = value.freeze
+        self[key] = value
       end
 
       freeze
