@@ -1,7 +1,7 @@
 ---
-one: settings.yml
-two: settings.yml
-three: settings.yml
+one:
+  two: settings.yml
+  three: settings.yml
 four: settings.yml
 five: settings.yml
 six: settings.yml

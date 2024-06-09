@@ -1,4 +1,4 @@
 ---
-one: settings/development.local.yml
-two: settings/development.local.yml
-three: settings/development.local.yml
+one:
+  two: settings/development.local.yml
+  three: settings/development.local.yml
