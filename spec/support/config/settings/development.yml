@@ -1,6 +1,6 @@
 ---
-one: settings/development.yml
-two: settings/development.yml
-three: settings/development.yml
+one:
+  two: settings/development.yml
+  three: settings/development.yml
 four: settings/development.yml
 five: settings/development.yml

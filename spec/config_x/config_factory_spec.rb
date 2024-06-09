@@ -31,22 +31,50 @@ RSpec.describe ConfigX::ConfigFactory do
       end
 
       around do |example|
-        settings__three = ENV["SETTINGS__THREE"]
-        ENV["SETTINGS__THREE"] = "environment variable"
+        settings__three = ENV["SETTINGS__ONE__THREE"]
+        ENV["SETTINGS__ONE__THREE"] = "environment variable"
         example.run
-        ENV["SETTINGS__THREE"] = settings__three
+        ENV["SETTINGS__ONE__THREE"] = settings__three
       end
 
       it "loads config files in order" do
         is_expected.to have_attributes(
-          one: "settings/development.local.yml",
-          two: "settings/development.local.yml",
-          three: "environment variable",
+          one: have_attributes(
+            two: "settings/development.local.yml",
+            three: "environment variable"
+          ),
           four: "settings.local.yml",
           five: "settings/development.yml",
           six: "settings.yml"
         )
       end
+    end
+  end
+
+  describe "#load" do
+    subject(:config_factory) do
+      described_class.new(
+        "development",
+        config_root: "spec/support/config"
+      ).load(*additional_sources)
+    end
+
+    let(:additional_sources) do
+      [
+        {one: {two: "additional hash source"}}
+      ]
+    end
+
+    it "loads config files in order" do
+      is_expected.to have_attributes(
+        one: have_attributes(
+          two: "additional hash source",
+          three: "settings/development.local.yml"
+        ),
+        four: "settings.local.yml",
+        five: "settings/development.yml",
+        six: "settings.yml"
+      )
     end
   end
 end

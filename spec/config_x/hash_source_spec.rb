@@ -13,4 +13,12 @@ RSpec.describe ConfigX::HashSource do
   end
 
   it { expect(config).to eq(hash) }
+
+  context "when keys are symbols" do
+    let(:hash) { {four: {bar: 42}} }
+
+    it "deep stringifies keys" do
+      expect(config).to eq("four" => {"bar" => 42})
+    end
+  end
 end

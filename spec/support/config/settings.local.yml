@@ -1,5 +1,5 @@
 ---
-one: settings.local.yml
-two: settings.local.yml
-three: settings.local.yml
+one:
+  two: settings.local.yml
+  three: settings.local.yml
 four: settings.local.yml
