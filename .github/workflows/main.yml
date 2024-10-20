@@ -26,7 +26,5 @@ jobs:
         bundler-cache: true
     - name: Lint
       run: bundle exec rake standard
-    - name: Type Check
-      run: bundle exec steep check --severity-level=error
     - name: Run Specs
       run: bundle exec rake

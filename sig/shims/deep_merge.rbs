@@ -1,7 +1,0 @@
-module DeepMerge
-  def self.deep_merge!: [K1, V1, K2, V2] (
-      Hash[K1, V1] source,
-      Hash[K2, V2] destination,
-      ?overwrite_arrays: bool
-    ) -> Hash[K1 | K2, V1 | V2]
-end

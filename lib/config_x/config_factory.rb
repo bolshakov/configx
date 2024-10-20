@@ -26,6 +26,10 @@ module ConfigX
       # Default root directory for configuration
       def default_config_root = "config"
 
+      # Default configuration class
+      # @return [Class<ConfigX::Configurable>]
+      def default_config_class = UntypedConfig
+
       # Load method to initialize and load the configuration
       def load(...) = new(...).load
     end
@@ -43,7 +47,8 @@ module ConfigX
       env_separator: self.class.default_env_separator,
       dir_name: self.class.default_dir_name,
       file_name: self.class.default_file_name,
-      config_root: self.class.default_config_root
+      config_root: self.class.default_config_root,
+      config_class: self.class.default_config_class
     )
       @env = env
       @env_prefix = env_prefix
@@ -51,15 +56,16 @@ module ConfigX
       @dir_name = dir_name
       @file_name = file_name
       @config_root = config_root
+      @config_class = config_class
     end
 
     # Loads the configuration from the sources and additional sources.
     # @param additional_sources [Array] additional sources to load configuration from.
-    # @return [Config] the loaded configuration.
+    # @return [UntypedConfig] the loaded configuration.
     def load(*additional_sources)
       (sources + additional_sources)
         .reduce(Builder.new) { |builder, source| builder.add_source(source) }
-        .load
+        .load(config_class:)
     end
 
     private
@@ -109,5 +115,8 @@ module ConfigX
 
     # The file name for settings.
     attr_reader :file_name
+
+    # The configuration class.
+    attr_reader :config_class
   end
 end

@@ -5,6 +5,11 @@ require "deep_merge/core"
 module ConfigX
   class Builder
     class << self
+      # Creates a source object based on the type of the input.
+      #
+      # @param source [Source, Hash, String, Pathname, ENV] the source input
+      # @param args [Hash] additional arguments for the source
+      # @return [Source]
       def source(source, **args)
         case source
         in Source then source
@@ -15,10 +20,11 @@ module ConfigX
         end
       end
 
+      # Loads the configuration.
+      #
+      # @return [UntypedConfig]
       # @see #initialize
-      def load(...)
-        new(...).load
-      end
+      def load(...) = new.load(...)
     end
 
     # @example
@@ -31,17 +37,18 @@ module ConfigX
 
     attr_reader :sources
 
+    # Adds a source to the builder.
+    #
+    # @param source [Source, Hash, String, Pathname, ENV] the source input
+    # @param args [Hash] additional arguments for the source
+    # @return [Builder]
     def add_source(source, **args)
       sources << self.class.source(source, **args)
       self
     end
 
-    # Loads config in the following order:
-    #   1. Reads default config
-    #   2. Reads all the config files provided in the order
-    #   3. Reads environment variables
-    def load
-      Config.new(read_from_sources)
+    def load(config_class:)
+      config_class.new(read_from_sources)
     end
 
     def ==(other)

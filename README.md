@@ -65,7 +65,7 @@ The resulting configuration will be:
 config = ConfigX.load
 config.api.enabled # => true
 config.api.endpoint # => "https://example.com"
-config.api.pretty_print # => "foobar"
+config.api.access_token # => "foobar"
 ```
 
 ### Customizing Configuration
@@ -120,47 +120,6 @@ export SETTINGS__API__ENABLED=off
 
 Environment variables have the highest priority and override the values from the configuration files. 
 
-### Builder Interface
-
-When you don't need to load configuration from the predefined default locations, you can use the builder interface
-which enables you to load configuration from any source:
-
-1. Plain ruby Hash
-
-```ruby 
-config = ConfigX.builder
-  .add_source({api: {enabled: true}})
-  .load
-
-config.api.enabled # => true
-```
-
-2. YAML file
-
-```ruby
-config = ConfigX.builder
-  .add_source('config/settings.yml')
-  .load
-```
-
-3. Environment variables
-
-```ruby
-config = ConfigX.builder
-  .add_source(ENV, prefix: "SETTINGS", separator: "__")
-  .load
-```
-
-You can also use the builder interface to load configuration from multiple sources:
-
-```ruby
-config = ConfigX.builder
-  .add_source({api: {enabled: true}})
-  .add_source('config/settings.yml')
-  .add_source(ENV, prefix: "SETTINGS", separator: "__")
-  .load
-```
-
 Sometimes you may want to just load configuration from a single source, for example, from for testing purposes:
 
 ```ruby
@@ -168,6 +127,31 @@ config = ConfigX.from({api: {enabled: true}})
 config.api.enabled # => true
 ```
 
+### Typed Config 
+
+ConfigX allows you to define typed configuration using the `ConfigX::Config` class which uses the `dry-struct` library 
+under the hood. 
+
+```ruby 
+class Config < ConfigX::Config
+  attribute :api do 
+    attribute :enabled, Types::Bool.default(false)
+    attribute :endpoint, Types::String
+    attribute :access_token, Types::String
+  end
+end 
+```
+
+You can then load the configuration using the `load` method:
+
+```ruby
+config = ConfigX.load(config_class: Config)
+config.api.enabled #=> true
+config.api.endpoint #=> "https://example.com"
+```
+
+Using typed configuration allows you to define the structure of the configuration and automatically cast values to the
+specified types.
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
