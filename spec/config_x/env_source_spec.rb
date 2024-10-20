@@ -59,7 +59,8 @@ RSpec.describe ConfigX::EnvSource do
         "MY_CONFIG__SIX" => "42",
         "MY_CONFIG__SEVEN" => "64.4",
         "MY_CONFIG__EIGHT" => "foo,bar",
-        "MY_CONFIG__NINE" => '["foo","bar"]'
+        "MY_CONFIG__NINE" => '["foo","bar"]',
+        "MY_CONFIG__TEN" => "- foo\n- bar"
       }
     end
 
@@ -73,7 +74,8 @@ RSpec.describe ConfigX::EnvSource do
         "six" => 42,
         "seven" => 64.4,
         "eight" => "foo,bar",
-        "nine" => ["foo", "bar"]
+        "nine" => ["foo", "bar"],
+        "ten" => ["foo", "bar"]
       })
     end
   end
