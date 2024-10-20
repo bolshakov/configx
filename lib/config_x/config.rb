@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 require "ostruct"
-require "deep_merge/core"
 
 module ConfigX
+  # The Config class extends OpenStruct to provide a flexible configuration object.
   class Config < OpenStruct
+    include Configurable
+
+    # @param members [Hash] the initial configuration hash
+    # @raise [ArgumentError] if any of the keys are not convertible to strings
     def initialize(members)
-      super()
+      super({})
 
       members.each do |key, value|
         raise ArgumentError, "option keys should be strings" unless key.respond_to?(:to_s)
@@ -27,17 +31,12 @@ module ConfigX
       freeze
     end
 
-    def with_fallback(fallback)
-      DeepMerge.deep_merge!(
-        to_h,
-        fallback.to_h,
-        overwrite_arrays: true
-      ).then { Config.new(_1) }
-    end
-
+    # Converts the Config object to a hash.
+    #
+    # @return [Hash] the configuration as a hash
     def to_h
       each_pair.each_with_object({}) do |(key, value), hash|
-        hash[key] = value.is_a?(Config) ? value.to_h : value
+        hash[key] = value.is_a?(self.class) ? value.to_h : value
       end
     end
   end

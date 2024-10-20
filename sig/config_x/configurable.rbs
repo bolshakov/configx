@@ -1,0 +1,11 @@
+module ConfigX
+  module Configurable
+    def self.new: (Hash[untyped, untyped]) -> instance
+
+    def initialize: (Hash[untyped, untyped]) -> void
+
+    def to_h: -> Hash[untyped, untyped]
+
+    def with_fallback: (Configurable) -> Configurable
+  end
+end

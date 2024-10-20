@@ -1,10 +1,6 @@
 module ConfigX
   class Config
-    def initialize: (Hash[untyped, untyped]) -> void
-
-    def to_h: -> Hash[untyped, untyped]
-
-    def with_fallback: (Config) -> Config
+    include Configurable
 
     def each_pair: -> Enumerable[[untyped, untyped]]
 
