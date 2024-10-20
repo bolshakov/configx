@@ -1,9 +1,0 @@
-module ConfigX
-  class Config
-    include Configurable
-
-    def each_pair: -> Enumerable[[untyped, untyped]]
-
-    def []=: (untyped, untyped) -> untyped
-  end
-end

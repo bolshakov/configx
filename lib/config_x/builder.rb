@@ -22,11 +22,9 @@ module ConfigX
 
       # Loads the configuration.
       #
-      # @return [Config]
+      # @return [UntypedConfig]
       # @see #initialize
-      def load(...)
-        new(...).load
-      end
+      def load(...) = new.load(...)
     end
 
     # @example
@@ -49,12 +47,8 @@ module ConfigX
       self
     end
 
-    # Loads config in the following order:
-    #   1. Reads default config
-    #   2. Reads all the config files provided in the order
-    #   3. Reads environment variables
-    def load
-      Config.new(read_from_sources)
+    def load(config_class:)
+      config_class.new(read_from_sources)
     end
 
     def ==(other)

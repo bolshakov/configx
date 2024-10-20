@@ -63,7 +63,7 @@ RSpec.describe ConfigX::Builder do
         .new
         .add_source(source1)
         .add_source(source2)
-        .load
+        .load(config_class: ConfigX::UntypedConfig)
     end
 
     let(:source1) do
@@ -90,7 +90,7 @@ RSpec.describe ConfigX::Builder do
 
     it "merge sources" do
       is_expected.to eq(
-        ConfigX::Config.new({
+        ConfigX::UntypedConfig.new({
           "foo" => "bar",
           "bar" => 42,
           "array" => [3, 4, 5],

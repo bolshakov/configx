@@ -1,8 +1,0 @@
-module Zeitwerk
-  class Loader
-    def self.for_gem: -> instance
-
-    def ignore: (String) -> void
-    def setup: -> void
-  end
-end
