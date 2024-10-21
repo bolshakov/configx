@@ -93,7 +93,7 @@ module ConfigX
     # @return [Array] the local setting files.
     def local_setting_files
       [
-        (File.join(config_root, "#{file_name}.local.yml") if env != "test"),
+        File.join(config_root, "#{file_name}.local.yml"),
         File.join(config_root, dir_name, "#{env}.local.yml")
       ].compact
     end
