@@ -26,7 +26,7 @@ module ConfigX
 
         Array(key.split(separator)[1..])
           .reverse_each
-          .reduce(YAML.load(value)) { |acc, k| {k.downcase => acc} }
+          .reduce(YAML.safe_load(value)) { |acc, k| {k.downcase => acc} }
           .tap { DeepMerge.deep_merge!(_1, config) }
       end
     end
