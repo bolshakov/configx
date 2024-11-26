@@ -8,4 +8,4 @@ gemspec
 gem "dry-struct"
 gem "rake", "~> 13.2"
 gem "rspec", "~> 3.0"
-gem "standard", "~> 1.41"
+gem "standard", "~> 1.42"
