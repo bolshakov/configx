@@ -6,6 +6,6 @@ source "https://rubygems.org"
 gemspec
 
 gem "dry-struct"
-gem "rake", "~> 13.2"
+gem "rake", "~> 13.3"
 gem "rspec", "~> 3.0"
 gem "standard", "~> 1.51"
